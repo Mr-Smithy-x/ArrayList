@@ -58,24 +58,23 @@ public:
             int oldsize = size;
             size = index + 1;
             int insertPos = 0;
-            type *newbackpack = new type[size];
+            type *newItems = new type[size];
             for (int i = 0; i < size; i++) {
                 if (i == index) {
-                    newbackpack[i] = item;
+                    newItems[i] = item;
                     insertPos++;
                     continue;
                 }
                 if(i-insertPos < oldsize) {
-                    newbackpack[i] = items[i - insertPos];
+                    newItems[i] = items[i - insertPos];
                 }
             }
-
             if (size - 1 > 0)
                 delete[] items;                    //destroy everything in here
             items = new type[size];            //reset with new size
             for (int i = 0; i < size; i++)
-                items[i] = newbackpack[i];
-            delete[] newbackpack;
+                items[i] = newItems[i];
+            delete[] newItems;
 
         }
         else if (index == size) {
@@ -84,21 +83,21 @@ public:
         }else {
             int insertPos = 0;
             size++;
-            type *newbackpack = new type[size];
+            type *newItems = new type[size];
             for (int i = 0; i < size; i++) {
                 if (i == index) {
-                    newbackpack[i] = item;
+                    newItems[i] = item;
                     insertPos++;
                     continue;
                 }
-                newbackpack[i] = items[i - insertPos];
+                newItems[i] = items[i - insertPos];
             }
             if (size - 1 > 0)
                 delete[] items;                    //destroy everything in here
             items = new type[size];            //reset with new size
             for (int i = 0; i < size; i++)
-                items[i] = newbackpack[i];
-            delete[] newbackpack;
+                items[i] = newItems[i];
+            delete[] newItems;
         }
     }
 
@@ -106,20 +105,20 @@ public:
     bool remove(int index) {
         if (0 < index < size) {
             int skipped = 0;
-            type *newbackpack = new type[size - 1];
+            type *newItems = new type[size - 1];
             for (int i = 0; i < size; i++) {
                 if (i == index) {
                     skipped++;
                     continue;
                 }
-                newbackpack[i - skipped] = items[i];
+                newItems[i - skipped] = items[i];
             }
             if (size - 1 > 0)
                 delete[] items;
             items = new type[size - 1];
             for (int i = 0; i < size - 1; i++)
-                items[i] = newbackpack[i];
-            delete[] newbackpack;
+                items[i] = newItems[i];
+            delete[] newItems;
             size--;
             return true;
         } else {
@@ -129,16 +128,16 @@ public:
 
     void push_back(type &item) {
         size++;
-        type *newbackpack = new type[size];
+        type *newItems = new type[size];
         for (int i = 0; i < size - 1; i++)    //old backpack size
-            newbackpack[i] = items[i];
-        newbackpack[size - 1] = item;
+            newItems[i] = items[i];
+        newItems[size - 1] = item;
         if (size - 1 > 0)
             delete[] items;                    //destroy everything in here
         items = new type[size];            //reset with new size
         for (int i = 0; i < size; i++)
-            items[i] = newbackpack[i];
-        delete[] newbackpack;
+            items[i] = newItems[i];
+        delete[] newItems;
     }
 };
 
